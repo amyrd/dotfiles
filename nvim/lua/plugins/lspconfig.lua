@@ -66,12 +66,17 @@ return {
 
       -- List of LSP servers to enable
       local servers = {
-        clangd = {},
+        clangd = {
+          filetypes = { 'c', 'cpp', 'objc', 'objcpp' },
+        },
         gopls = {},
         pyright = {},
         rust_analyzer = {},
         cssls = {},
         html = {},
+        bufls = {
+          filetypes = { 'proto' },
+        },
         sqls = {
           on_attach = function(client, bufnr)
             -- Disable formatting for SQL language server
@@ -93,6 +98,10 @@ return {
       -- Ensure the servers and tools are installed
       local ensure_installed = vim.tbl_keys(servers)
       vim.list_extend(ensure_installed, { 'stylua' }) -- Additional tools
+      require('lspconfig').protols.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+      }
       require('mason').setup()
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
