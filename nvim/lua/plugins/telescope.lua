@@ -28,10 +28,34 @@ return {
       require('telescope').setup {
         defaults = {
           previewer = true,
+          borderchars = {
+            '━',
+            '┃',
+            '━',
+            '┃',
+            '┏',
+            '┓',
+            '┛',
+            '┗',
+          },
         },
         extensions = {
           ['ui-select'] = {
-            require('telescope.themes').get_dropdown(),
+            require('telescope.themes').get_dropdown {
+              borderchars = {
+                borderchars = {
+                  '━',
+                  '┃',
+                  '━',
+                  '┃',
+                  '┏',
+                  '┓',
+                  '┛',
+                  '┗',
+                },
+                -- same custom chars for dropdowns
+              },
+            },
           },
         },
       }

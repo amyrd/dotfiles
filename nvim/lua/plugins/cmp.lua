@@ -1,6 +1,7 @@
 return {
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
+
     event = 'InsertEnter',
 
     dependencies = {
@@ -25,29 +26,11 @@ return {
         },
         window = {
           completion = {
-            border = {
-              { '󱐋', 'WarningMsg' }, -- Custom border with symbols and highlight groups
-              { '─', 'Comment' },
-              { '╮', 'Comment' },
-              { '│', 'Comment' },
-              { '╯', 'Comment' },
-              { '─', 'Comment' },
-              { '╰', 'Comment' },
-              { '│', 'Comment' },
-            },
+            border = { '┏', '━', '┓', '┃', '┛', '━', '┗', '┃' },
             scrollbar = false,
           },
           documentation = {
-            border = {
-              { '', 'DiagnosticHint' },
-              { '─', 'Comment' },
-              { '╮', 'Comment' },
-              { '│', 'Comment' },
-              { '╯', 'Comment' },
-              { '─', 'Comment' },
-              { '╰', 'Comment' },
-              { '│', 'Comment' },
-            },
+            border = { '┏', '━', '┓', '┃', '┛', '━', '┗', '┃' },
             scrollbar = false,
           },
         },

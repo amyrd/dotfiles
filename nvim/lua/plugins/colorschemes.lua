@@ -11,6 +11,12 @@ return {
         hide_fillchars = true,
         borderless_telescope = false,
         terminal_colors = false,
+        theme = {
+          highlights = {
+            TelescopeBorder = { fg = '#FFFFFF' },
+            FloatBorder = { fg = '#FFFFFF' },
+          },
+        },
       }
       vim.cmd 'colorscheme cyberdream' -- set the colorscheme
     end,
