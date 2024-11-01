@@ -8,6 +8,7 @@ return {
     config = function()
       require('obsidian').setup {
         disable_frontmatter = true,
+        -- turn off to let render-markdown.lua handle it
         ui = { enable = false },
 
         note_id_func = function(title)
@@ -26,11 +27,13 @@ return {
         workspaces = {
           {
             name = 'personal',
+            -- NOTE: this should be whatever your notes directory is
             path = vim.fn.expand '~/知識の書庫/',
           },
         },
 
         templates = {
+          -- NOTE: this should be whatever your notes directory is
           folder = vim.fn.expand '~/知識の書庫/雑多/template',
           date_format = '%Y-%m-%d-%a',
           time_format = '%H:%M',
@@ -45,6 +48,7 @@ return {
         end,
       }
 
+      -- keybinds
       vim.keymap.set('n', '-#', ':ObsidianTags<CR>', { desc = 'tags' })
       vim.keymap.set('n', '-l', ':ObsidianBacklinks<CR>', { desc = 'backlinks' })
       vim.keymap.set('n', '-i', ':ObsidianTemplate<CR>', { desc = 'insert template' })

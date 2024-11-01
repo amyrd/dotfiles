@@ -44,7 +44,7 @@ return {
         '⠉⠉⠉⠉⠉⠗⠚⠹⣤⡖⠊⠉⠻⠿⠋⠑⢦⣄⣴⠿⣽⣿⠒⠲⣤⣤⣀⣈⡷⠤⠤⠵⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀',
       }
 
-      vim.api.nvim_command 'highlight AlphaHeader guifg=#d7cfac' -- this will make the color match mimikyu's!
+      vim.api.nvim_command 'highlight AlphaHeader guifg=#d7cfac'
       dashboard.section.header.opts = {
         position = 'center',
         hl = 'AlphaHeader',

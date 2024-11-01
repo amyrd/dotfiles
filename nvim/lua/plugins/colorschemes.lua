@@ -21,8 +21,5 @@ return {
       vim.cmd 'colorscheme cyberdream' -- set the colorscheme
     end,
   },
-  {
-    'rebelot/kanagawa.nvim',
-  },
 }
 -- vim: ts=2 sts=2 sw=2 et
