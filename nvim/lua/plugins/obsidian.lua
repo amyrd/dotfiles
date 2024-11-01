@@ -8,6 +8,7 @@ return {
     config = function()
       require('obsidian').setup {
         disable_frontmatter = true,
+        ui = { enable = false },
 
         note_id_func = function(title)
           if title ~= nil then

@@ -1,7 +1,3 @@
-vim.cmd [[
-  highlight WhichKeyBorder guifg=#FFFFFF  " Replace #FF5733 with your preferred color
-]]
-
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.expandtab = true

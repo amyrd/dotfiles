@@ -1,3 +1,13 @@
+local custom_border = {
+  { '╭', 'FloatBorder' },
+  { '─', 'FloatBorder' },
+  { '╮', 'FloatBorder' },
+  { '│', 'FloatBorder' },
+  { '╯', 'FloatBorder' },
+  { '─', 'FloatBorder' },
+  { '╰', 'FloatBorder' },
+  { '│', 'FloatBorder' },
+}
 return {
   {
     -- LSP Configuration & Plugins
@@ -36,7 +46,7 @@ return {
         map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
         map('K', vim.lsp.buf.hover, 'Hover Documentation')
         map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-
+        vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = custom_border })
         -- Highlighting references
         if client.server_capabilities.documentHighlightProvider then
           local highlight_group = vim.api.nvim_create_augroup('LSPDocumentHighlight', { clear = true })
