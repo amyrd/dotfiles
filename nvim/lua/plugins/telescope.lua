@@ -27,6 +27,7 @@ return {
       -- See `:help telescope` and `:help telescope.setup()`
       require('telescope').setup {
         defaults = {
+          layout_strategy = 'center',
           previewer = true,
           borderchars = {
             '━',
