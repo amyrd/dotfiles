@@ -2,9 +2,6 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = true
-vim.diagnostic.config {
-  float = { border = 'rounded' },
-}
 
 require 'options'
 require 'keymaps'

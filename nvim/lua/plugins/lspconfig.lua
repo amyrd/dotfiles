@@ -81,7 +81,11 @@ return {
         },
         gopls = {},
         pyright = {},
-        rust_analyzer = {},
+        rust_analyzer = {
+          root_dir = function(fname)
+            return require('lspconfig.util').root_pattern('Cargo.toml', '.git')(fname) or vim.fn.fnamemodify(fname, ':p:h')
+          end,
+        },
         cssls = {},
         html = {},
         bufls = {

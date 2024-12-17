@@ -7,7 +7,7 @@ return {
         enabled = true,
         converter = 'latex2text',
         highlight = 'RenderMarkdownMath',
-        top_pad = 0,
+        top_pad = 1,
         bottom_pad = 0,
       },
     }

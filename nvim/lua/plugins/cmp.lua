@@ -16,7 +16,7 @@ return {
       local luasnip = require 'luasnip'
       luasnip.config.setup {}
 
-      local max_items = 5 -- Optional: Define max_items if needed
+      local max_items = 8 -- Optional: Define max_items if needed
 
       cmp.setup {
         snippet = {

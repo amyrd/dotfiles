@@ -22,4 +22,14 @@ return {
     end,
   },
 }
+--[[
+vim.opt.background = 'dark' -- set this to dark or light
+return {
+  'nyngwang/nvimgelion',
+  config = function()
+    -- do whatever you want for further customization~
+  end,
+}
+]]
+--
 -- vim: ts=2 sts=2 sw=2 et

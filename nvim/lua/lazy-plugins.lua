@@ -42,6 +42,7 @@ require('lazy').setup({
   require 'plugins/noice',
 
   require 'plugins/render-markdown',
+  require 'plugins/nui',
   -- require 'plugins/avante',
 }, {
   ui = {

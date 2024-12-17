@@ -66,7 +66,7 @@ return {
         window_overlap_clear_ft_ignore = { 'cmp_menu', 'cmp_docs', '' },
 
         -- auto show/hide images when the editor gains/looses focus
-        editor_only_render_when_focused = false,
+        editor_only_render_when_focused = true,
 
         -- auto show/hide images in the correct tmux window
         -- In the tmux.conf add `set -g visual-activity off`

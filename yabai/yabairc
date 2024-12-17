@@ -3,11 +3,11 @@ yabai -m config layout bsp
 # New window spawns to the right if vertical split, or bottom if horizontal split
 yabai -m config window_placement second_child
 # padding set to 12px
-yabai -m config top_padding 8
-yabai -m config bottom_padding 8
-yabai -m config left_padding 8
-yabai -m config right_padding 8
-yabai -m config window_gap 8
+yabai -m config top_padding 2
+yabai -m config bottom_padding 2
+yabai -m config left_padding 2
+yabai -m config right_padding 2
+yabai -m config window_gap 2
 # center mouse on window with focus
 yabai -m config mouse_follows_focus off
 
@@ -23,3 +23,5 @@ yabai -m config mouse_action2 resize
 yabai -m mouse_drop_action swap
 yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Calculator$" manage=off
+yabai -m rule --add app="^Finder$" manage=off
+yabai -m rule --add app="^Preview$" manage=off
