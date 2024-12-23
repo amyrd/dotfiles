@@ -43,6 +43,7 @@ require('lazy').setup({
 
   require 'plugins/render-markdown',
   require 'plugins/nui',
+  require 'plugins/snow',
   -- require 'plugins/avante',
 }, {
   ui = {
