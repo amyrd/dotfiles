@@ -6,8 +6,8 @@ vim.opt.termguicolors = true
 return {
   {
     'nvim-tree/nvim-tree.lua',
+    event = { 'BufReadPost', 'BufWinEnter' },
     config = function()
-      -- Set up nvim-tree with a visible vertical separator
       require('nvim-tree').setup {
         view = {
           side = 'left',
@@ -29,7 +29,7 @@ return {
           indent_markers = {
             enable = true, -- Enable indent markers to add a vertical line
             icons = {
-              corner = '└',
+              corner = '╰',
               edge = '│',
               item = '│',
               bottom = '─',
@@ -38,7 +38,6 @@ return {
           },
         },
       }
-      -- Set a color for the indent markers
 
       -- Keymap to toggle nvim-tree
       vim.keymap.set('n', '|', ':NvimTreeToggle<CR>', { desc = 'opens tree', noremap = true, silent = true })

@@ -1,33 +1,26 @@
 local custom_border = {
+  { '─', 'FloatBorder' },
+  { '│', 'FloatBorder' },
+  { '─', 'FloatBorder' },
+  { '│', 'FloatBorder' },
   { '╭', 'FloatBorder' },
-  { '─', 'FloatBorder' },
   { '╮', 'FloatBorder' },
-  { '│', 'FloatBorder' },
   { '╯', 'FloatBorder' },
-  { '─', 'FloatBorder' },
   { '╰', 'FloatBorder' },
-  { '│', 'FloatBorder' },
 }
 return {
   {
-    -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
+    event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
-      -- Automatically install LSPs and related tools to Neovim's standard path
       { 'williamboman/mason.nvim', config = true },
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
-
-      -- Useful status updates for LSP
       { 'j-hui/fidget.nvim', opts = {} },
-
-      -- Additional Lua configuration for Neovim
       { 'folke/neodev.nvim', opts = {} },
     },
     config = function()
-      -- Setup function to run when an LSP attaches to a buffer
       local on_attach = function(client, bufnr)
-        -- Helper function for defining keymaps
         local function map(keys, func, desc)
           if desc then
             desc = 'LSP: ' .. desc
@@ -46,8 +39,10 @@ return {
         map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
         map('K', vim.lsp.buf.hover, 'Hover Documentation')
         map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+
+        -- Floating windows with custom borders
         vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = custom_border })
-        -- Highlighting references
+
         if client.server_capabilities.documentHighlightProvider then
           local highlight_group = vim.api.nvim_create_augroup('LSPDocumentHighlight', { clear = true })
           vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
@@ -62,7 +57,6 @@ return {
           })
         end
 
-        -- Inlay hints (if supported)
         if client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
           map('<leader>th', function()
             vim.lsp.inlay_hint(bufnr, nil)
@@ -70,15 +64,11 @@ return {
         end
       end
 
-      -- Capabilities for LSP servers
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
-      -- List of LSP servers to enable
       local servers = {
-        clangd = {
-          filetypes = { 'c', 'cpp', 'objc', 'objcpp' },
-        },
+        clangd = { filetypes = { 'c', 'cpp', 'objc', 'objcpp' } },
         gopls = {},
         pyright = {},
         rust_analyzer = {
@@ -88,12 +78,8 @@ return {
         },
         cssls = {},
         html = {},
-        bufls = {
-          filetypes = { 'proto' },
-        },
         sqls = {
           on_attach = function(client, bufnr)
-            -- Disable formatting for SQL language server
             client.server_capabilities.documentFormattingProvider = false
             on_attach(client, bufnr)
           end,
@@ -101,25 +87,17 @@ return {
         lua_ls = {
           settings = {
             Lua = {
-              completion = {
-                callSnippet = 'Replace',
-              },
+              completion = { callSnippet = 'Replace' },
             },
           },
         },
       }
 
-      -- Ensure the servers and tools are installed
       local ensure_installed = vim.tbl_keys(servers)
-      vim.list_extend(ensure_installed, { 'stylua' }) -- Additional tools
-      require('lspconfig').protols.setup {
-        on_attach = on_attach,
-        capabilities = capabilities,
-      }
+      vim.list_extend(ensure_installed, { 'stylua' })
       require('mason').setup()
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-      -- Setup servers via mason-lspconfig
       require('mason-lspconfig').setup {
         handlers = {
           function(server_name)
@@ -131,7 +109,6 @@ return {
         },
       }
 
-      -- Autocommand to clear references when LSP detaches
       vim.api.nvim_create_autocmd('LspDetach', {
         group = vim.api.nvim_create_augroup('LSPDetach', { clear = true }),
         callback = function(event)
@@ -142,4 +119,3 @@ return {
     end,
   },
 }
--- vim: ts=2 sts=2 sw=2 et
