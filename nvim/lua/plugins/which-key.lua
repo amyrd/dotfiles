@@ -34,26 +34,14 @@ return {
 
       -- Define key mappings
       wk.add {
-        -- Group for File-related mappings
-        { '<leader>f', group = '[F]ile' }, -- Group description
-        { '<leader>ff', '<cmd>Telescope find_files<cr>', desc = 'Find File' }, -- Find file with Telescope
-        { '<leader>fn', '<cmd>enew<cr>', desc = 'New File' }, -- Open a new file
-
         -- Group for Window-related mappings
         { '<leader>w', group = '[W]indows' }, -- Group description
-        { '<leader>ww', '<cmd>vsplit<cr>', desc = 'Split Window' }, -- Vertical split
         { '<leader>wq', '<cmd>wq<cr>', desc = 'Save and Quit' }, -- Save and quit
-
         -- Quit command
         { '<leader>q', '<cmd>q<cr>', desc = 'Quit' }, -- Quit Vim
-
         -- Example of a hidden keymap
         { '<leader>h1', hidden = true }, -- Hidden keymap (won't be shown in WhichKey)
-
         -- Example of a proxy mapping for <leader>w to window management
-        { '<leader>w', proxy = '<c-w>', group = '[W]indows' }, -- Proxy to window management
-
-        -- Example of using expand for dynamic mappings (optional)
         {
           '<leader>b',
           group = 'Buffers',

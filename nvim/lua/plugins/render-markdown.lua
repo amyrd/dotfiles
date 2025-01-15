@@ -1,9 +1,15 @@
 return {
   'MeanderingProgrammer/render-markdown.nvim',
   ft = 'markdown',
-  dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- or use 'mini.icons' or 'nvim-web-devicons'
+  dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-web-devicons' },
+  ---@module 'render-markdown'
+  ---@type render.md.UserConfig
+  opts = {},
   config = function()
     require('render-markdown').setup {
+      checkbox = {
+        checked = { scope_highlight = '@markup.strikethrough' },
+      },
       latex = {
         enabled = true,
         converter = 'latex2text',
@@ -12,5 +18,6 @@ return {
         bottom_pad = 0,
       },
     }
+    vim.api.nvim_set_keymap('n', '<leader>:', 'viw<esc>a*<esc>bi*<esc>l', { noremap = true, silent = true })
   end,
 }

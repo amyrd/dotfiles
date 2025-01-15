@@ -1,7 +1,6 @@
 return {
   {
     'epwalsh/obsidian.nvim',
-    ft = 'markdown',
     version = '*', -- recommended, use latest release instead of latest commit
     dependencies = {
       'nvim-lua/plenary.nvim',
@@ -10,16 +9,13 @@ return {
       require('obsidian').setup {
         disable_frontmatter = true,
         -- turn off to let render-markdown.lua handle it
-        ui = { enable = false },
-
-        note_id_func = function(title)
-          if title ~= nil then
-            return title:gsub(' ', '-'):gsub('[^A-Za-z0-9-]', ''):lower()
-          else
-            return tostring(os.time())
-          end
-        end,
-
+        ui = {
+          enable = false,
+          checkboxes = {
+            [' '] = { char = 'z', hl_group = 'ObsidianTodo', order = 1 },
+            ['x'] = { char = '✔', hl_group = 'ObsidianDone', style = 'strikethrough', order = 2 },
+          },
+        },
         note_path_func = function(spec)
           local path = spec.dir / tostring(spec.id)
           return path:with_suffix '.md'
@@ -34,13 +30,11 @@ return {
         },
 
         templates = {
-          -- NOTE: this should be whatever your notes directory is
-          folder = vim.fn.expand '~/知識の書庫/雑多/template',
+          folder = vim.fn.expand '~/vaults/personal/templates',
           date_format = '%Y-%m-%d-%a',
           time_format = '%H:%M',
+          default = 'default.md',
         },
-        -- Optional, by default when you use `:ObsidianFollowLink` on a link to an external
-        -- URL it will be ignored but you can customize this behavior here.
         ---@param url string
         follow_url_func = function(url)
           -- Open the URL in the default web browser.
