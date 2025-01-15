@@ -1,9 +1,7 @@
 return {
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
-
     event = 'InsertEnter',
-
     dependencies = {
       'L3MON4D3/LuaSnip',
       'saadparwaiz1/cmp_luasnip',
@@ -56,9 +54,13 @@ return {
         },
 
         sources = {
-          { name = 'nvim_lsp', max_item_count = max_items },
-          { name = 'luasnip', max_item_count = max_items },
-          { name = 'path', max_item_count = max_items },
+          {
+            name = 'lazydev',
+            group_index = 0,
+          },
+          { name = 'nvim_lsp' },
+          { name = 'luasnip' },
+          { name = 'path' },
         },
       }
     end,

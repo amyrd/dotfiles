@@ -17,20 +17,19 @@ return {
           },
         },
         note_path_func = function(spec)
-          local path = spec.dir / tostring(spec.id)
+          local title = spec.title or 'Untitled'
+          local path = spec.dir / title
           return path:with_suffix '.md'
         end,
 
         workspaces = {
           {
             name = 'personal',
-            -- NOTE: this should be whatever your notes directory is
             path = vim.fn.expand '~/知識の書庫/',
           },
         },
-
         templates = {
-          folder = vim.fn.expand '~/vaults/personal/templates',
+          folder = vim.fn.expand '~/知識の書庫/雑多/template/',
           date_format = '%Y-%m-%d-%a',
           time_format = '%H:%M',
           default = 'default.md',
