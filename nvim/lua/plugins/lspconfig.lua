@@ -1,25 +1,28 @@
 return {
   {
-    -- The main plugin that enables support for Language Server Protocol (LSP)
+    -- Main plugin for LSP configuration
     'neovim/nvim-lspconfig',
-    -- Load the plugin when you open a file or create a new one
     event = { 'BufReadPre', 'BufNewFile' },
-    -- Other plugins that this configuration depends on
     dependencies = {
-      -- Mason: A plugin to manage external tools like LSP servers
+      -- Mason plugins for managing external tools
       { 'williamboman/mason.nvim', config = true },
-      -- Makes Mason work with nvim-lspconfig for installing LSP servers
       'williamboman/mason-lspconfig.nvim',
-      -- Installs additional tools automatically with Mason
       'WhoIsSethDaniel/mason-tool-installer.nvim',
-      -- A plugin that provides a small status window for LSP progress
       { 'j-hui/fidget.nvim', opts = {} },
-      -- A helper plugin to make working with Lua in Neovim easier
-      { 'folke/lazydev.nvim', ft = 'lua', opts = {} },
+      -- Helps with Lua development by providing autocompletion and Neovim-specific API info
+      {
+        'folke/lazydev.nvim',
+        ft = 'lua',
+        opts = {
+          library = {
+            -- Load luvit types when the `vim.uv` word is found
+            { path = 'luvit-meta/library', words = { 'vim%.uv' } },
+          },
+        },
+      },
     },
-    -- The main configuration function for setting up LSP
     config = function()
-      -- Function that runs whenever an LSP server attaches to a file buffer
+      -- This function runs whenever an LSP server attaches to a buffer (a file in Neovim)
       local on_attach = function(client, bufnr)
         -- Helper function to create key mappings
         local function map(keys, func, desc)
@@ -29,8 +32,7 @@ return {
           vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
         end
 
-        -- Keybindings for LSP features
-        -- These let you navigate and use LSP features like finding definitions or renaming variables
+        -- Define key mappings for LSP features
         map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
         map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
         map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
@@ -42,10 +44,7 @@ return {
         map('K', vim.lsp.buf.hover, 'Hover Documentation')
         map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
-        -- Adds custom borders to floating windows (optional aesthetic improvement)
-        vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
-
-        -- Highlight words under the cursor (useful for tracking references in code)
+        -- Highlight words under the cursor
         if client.server_capabilities.documentHighlightProvider then
           local highlight_group = vim.api.nvim_create_augroup('LSPDocumentHighlight', { clear = true })
           vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
@@ -60,7 +59,7 @@ return {
           })
         end
 
-        -- Toggle inlay hints (annotations in code like parameter names)
+        -- Toggle inlay hints
         if client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
           map('<leader>th', function()
             vim.lsp.inlay_hint(bufnr, nil)
@@ -68,32 +67,29 @@ return {
         end
       end
 
-      -- Capabilities describe what Neovim's LSP client can do
+      -- Define client capabilities for LSP servers
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
-      -- List of LSP servers to configure
-      -- Each entry can have settings to customize its behavior
+      -- Define the LSP servers to configure
       local servers = {
         clangd = { filetypes = { 'c', 'cpp', 'objc', 'objcpp' } },
-        gopls = {}, -- Go programming language
+        gopls = {}, -- Go
         pyright = {}, -- Python
-        rust_analyzer = {
-          -- Custom function to determine the project root for Rust
+        rust_analyzer = { -- Rust
           root_dir = function(fname)
             return require('lspconfig.util').root_pattern('Cargo.toml', '.git')(fname) or vim.fn.fnamemodify(fname, ':p:h')
           end,
         },
         cssls = {}, -- CSS
         html = {}, -- HTML
-        sqls = {
-          -- Disable automatic formatting for SQL
+        sqls = { -- SQL
           on_attach = function(client, bufnr)
-            client.server_capabilities.documentFormattingProvider = false
+            client.server_capabilities.documentFormattingProvider = false -- Disable formatting for SQL
             on_attach(client, bufnr)
           end,
         },
-        lua_ls = {
+        lua_ls = { -- Lua (for Neovim configurations)
           settings = {
             Lua = {
               completion = { callSnippet = 'Replace' },
@@ -102,22 +98,27 @@ return {
         },
       }
 
-      -- Ensure these servers are installed by Mason
+      -- Ensure the specified LSP servers are installed
       local ensure_installed = vim.tbl_keys(servers)
-      vim.list_extend(ensure_installed, { 'stylua' }) -- Add other tools like formatters
 
-      -- Set up Mason and Mason-related plugins
+      -- Mason setup
       require('mason').setup()
+
+      -- Mason-LSPConfig setup
       require('mason-lspconfig').setup {
-        ensure_installed = ensure_installed, -- Install listed servers
+        ensure_installed = ensure_installed, -- Servers to install
         automatic_installation = true, -- Automatically install missing servers
       }
+
+      -- Mason-Tool-Installer setup for additional tools
       require('mason-tool-installer').setup {
-        ensure_installed = ensure_installed, -- Install tools like formatters and linters
+        ensure_installed = { 'stylua' }, -- Add tools like formatters and linters here
       }
 
-      -- Configure LSP servers using Mason
+      -- Configure the LSP servers
       require('mason-lspconfig').setup {
+        ensure_installed = ensure_installed,
+        automatic_installation = true,
         handlers = {
           function(server_name)
             local server_opts = servers[server_name] or {}
@@ -128,7 +129,7 @@ return {
         },
       }
 
-      -- Clear highlights when an LSP server detaches
+      -- Cleanup: Clear highlights when LSP detaches
       vim.api.nvim_create_autocmd('LspDetach', {
         group = vim.api.nvim_create_augroup('LSPDetach', { clear = true }),
         callback = function(event)

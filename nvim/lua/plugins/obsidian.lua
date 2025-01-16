@@ -12,8 +12,9 @@ return {
         ui = {
           enable = false,
           checkboxes = {
-            [' '] = { char = 'z', hl_group = 'ObsidianTodo', order = 1 },
-            ['x'] = { char = '✔', hl_group = 'ObsidianDone', style = 'strikethrough', order = 2 },
+            -- ui is managed by render markdown, but this is to specify the only staes are checked and unchecked
+            [' '] = { char = '', hl_group = 'ObsidianTodo', order = 1 },
+            ['x'] = { char = '', hl_group = 'ObsidianDone', order = 2 },
           },
         },
         note_path_func = function(spec)

@@ -32,14 +32,14 @@ return {
       -- I don't want to give my images a name, but instead autofill it using
       -- the date and time as shown on `file_name` below
       prompt_for_file_name = false, ---@type boolean
-      file_name = '%Y-%m-%d-at-%H-%M-%S', ---@type string
+      file_name = '', ---@type string
 
       -- -- Set the extension that the image file will have
       -- -- I'm also specifying the image options with the `process_cmd`
       -- -- Notice that I HAVE to convert the images to the desired format
       -- -- If you don't specify the output format, you won't see the size decrease
 
-      extension = 'avif', ---@type string
+      extension = ' ', ---@type string
       process_cmd = 'convert - -quality 75 avif:-', ---@type string
 
       -- extension = "webp", ---@type string

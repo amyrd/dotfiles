@@ -1,14 +1,14 @@
 return {
   'kawre/leetcode.nvim',
-  build = ':TSUpdate html', -- if you have `nvim-treesitter` installed
+  build = ':TSUpdate html', -- Updates Treesitter parsers for HTML, if nvim-treesitter is installed
   dependencies = {
     'nvim-telescope/telescope.nvim',
-    -- "ibhagwan/fzf-lua",
+    -- 'ibhagwan/fzf-lua',
     'nvim-lua/plenary.nvim',
     'MunifTanjim/nui.nvim',
   },
+  cmd = 'Leet', -- Loads the plugin when the :Leetcode command is executed
   opts = {
-    lang = 'go',
-    -- configuration goes here
+    lang = '', -- Specify the default language for Leetcode
   },
 }
