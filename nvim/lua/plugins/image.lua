@@ -1,13 +1,7 @@
 return {
   {
-    'vhyrro/luarocks.nvim',
-    ft = { 'markdown' }, -- lazy load for specific filetypes
-    opts = {
-      rocks = { 'magick' },
-    },
-  },
-  {
     '3rd/image.nvim',
+    build = false,
     dependencies = { 'luarocks.nvim' },
     ft = { 'markdown' },
     config = function()
@@ -22,15 +16,6 @@ return {
             only_render_image_at_cursor = false,
             filetypes = { 'markdown', 'vimwiki' },
           },
-          neorg = {
-            enabled = true,
-            clear_in_insert_mode = false,
-            download_remote_images = true,
-            only_render_image_at_cursor = false,
-            filetypes = { 'norg' },
-          },
-          html = { enabled = true },
-          css = { enabled = true },
         },
         max_height_window_percentage = 50,
         window_overlap_clear_enabled = false,
