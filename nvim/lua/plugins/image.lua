@@ -1,7 +1,7 @@
 return {
   {
     'vhyrro/luarocks.nvim',
-    ft = { 'markdown', 'vimwiki', 'norg', 'html', 'css' }, -- lazy load for specific filetypes
+    ft = { 'markdown' }, -- lazy load for specific filetypes
     opts = {
       rocks = { 'magick' },
     },
@@ -9,7 +9,7 @@ return {
   {
     '3rd/image.nvim',
     dependencies = { 'luarocks.nvim' },
-    ft = { 'markdown', 'vimwiki', 'norg', 'html', 'css' },
+    ft = { 'markdown' },
     config = function()
       require('image').setup {
         backend = 'kitty',

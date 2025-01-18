@@ -7,7 +7,6 @@ return {
     'nvim-lua/plenary.nvim',
     'MunifTanjim/nui.nvim',
   },
-  cmd = 'Leet', -- Loads the plugin when the :Leetcode command is executed
   opts = {
     lang = '', -- Specify the default language for Leetcode
   },
