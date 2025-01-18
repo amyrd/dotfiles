@@ -25,7 +25,8 @@ require('lazy').setup({
 
   require 'plugins/nvim-tree',
 
-  require 'plugins/ui',
+  --require 'plugins/ui',
+  require 'plugins/dashboard',
 
   require 'plugins/autopairs',
 
