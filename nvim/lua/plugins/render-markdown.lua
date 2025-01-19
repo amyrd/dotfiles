@@ -17,6 +17,15 @@ return {
         top_pad = 1,
         bottom_pad = 0,
       },
+      code = {
+        width = 'block',
+      },
+      heading = {
+        enabled = false,
+      },
+      quote = {
+        repeat_linebreak = true,
+      },
     }
     vim.api.nvim_set_keymap('n', '<leader>:', 'viw<esc>a*<esc>bi*<esc>l', { noremap = true, silent = true })
   end,
