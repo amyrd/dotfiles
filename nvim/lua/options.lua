@@ -33,5 +33,15 @@ vim.opt.inccommand = 'split'
 -- Show which line your cursor is on
 vim.opt.cursorline = true
 vim.opt.scrolloff = 20
-
+vim.api.nvim_create_autocmd('BufReadPre', {
+  pattern = '*',
+  callback = function()
+    -- Get the current file's full path
+    local file_path = vim.fn.expand '%:p'
+    -- Check if the file is in the specific directory (e.g., ~/notes/)
+    if file_path:match '/path/to/your/notes/' then
+      vim.cmd 'silent !clear'
+    end
+  end,
+})
 -- vim: ts=2 sts=2 sw=2 et

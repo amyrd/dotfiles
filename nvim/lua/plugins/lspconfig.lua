@@ -2,7 +2,6 @@ return {
   {
     -- Main plugin for LSP configuration
     'neovim/nvim-lspconfig',
-    event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
       -- Mason plugins for managing external tools
       { 'williamboman/mason.nvim', config = true },
@@ -10,17 +9,8 @@ return {
       'WhoIsSethDaniel/mason-tool-installer.nvim',
       { 'j-hui/fidget.nvim', opts = {} },
       -- Helps with Lua development by providing autocompletion and Neovim-specific API info
-      {
-        'folke/lazydev.nvim',
-        ft = 'lua',
-        opts = {
-          library = {
-            -- Load luvit types when the `vim.uv` word is found
-            { path = 'luvit-meta/library', words = { 'vim%.uv' } },
-          },
-        },
-      },
     },
+    event = { 'BufReadPre', 'BufNewFile' },
     config = function()
       -- This function runs whenever an LSP server attaches to a buffer (a file in Neovim)
       local on_attach = function(client, bufnr)

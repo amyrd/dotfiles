@@ -6,18 +6,30 @@ return {
       sections = {
         {
           section = 'terminal',
-          cmd = 'cat ~/知識の書庫/todo.md',
+          cmd = 'cat ~/知識の書庫/todo.md; sleep .1',
           ttl = 0,
           indent = 4,
           padding = 5,
         },
         {
           section = 'terminal',
-          cmd = 'krabby random -i',
-          --cmd = 'krabby name eternatus -i',
+          cmd = 'krabby random -i; sleep .1',
+          --
+          --
+          -- run for mark navarro
+          --
+          -- NOTE: TOP SECRET
+          --
+          --cmd = 'cd ~/code/donut/ && ./donut',
+          --
+          -- mega, mega-x, mega-y, gmax, alola, hisui, galar
+          --
+          --cmd = 'krabby name zoroark -i --form hisui',
           ttl = 0,
           pane = 2,
           indent = 4,
+          -- height for donut
+          --height = 60,
           height = 30,
           width = 60,
         },

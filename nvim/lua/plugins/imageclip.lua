@@ -32,15 +32,21 @@ return {
       -- I don't want to give my images a name, but instead autofill it using
       -- the date and time as shown on `file_name` below
       prompt_for_file_name = false, ---@type boolean
-      file_name = '', ---@type string
+      file_name = function()
+        return os.date '%Y%m%d%H%M%S' -- Unique timestamp-based filename
+      end,
 
       -- -- Set the extension that the image file will have
       -- -- I'm also specifying the image options with the `process_cmd`
       -- -- Notice that I HAVE to convert the images to the desired format
       -- -- If you don't specify the output format, you won't see the size decrease
 
-      extension = ' ', ---@type string
-      process_cmd = 'convert - -quality 75 avif:-', ---@type string
+      extension = '.', ---@type string
+
+      --process_cmd = 'convert - -resize 75% -depth 8 -strip -quality 75 avif:-',
+
+      process_cmd = 'convert - -resize 75% -strip -quality 75 webp:-',
+      --process_cmd = 'convert - -quality 75 avif:-', ---@type string
 
       -- extension = "webp", ---@type string
       -- process_cmd = "convert - -quality 75 webp:-", ---@type string
@@ -94,7 +100,7 @@ return {
         --
         -- -- This will dynamically configure the alternative text to show the
         -- -- same that you configured as the "file_name" above
-        template = '![$FILE_NAME]($FILE_PATH)', ---@type string
+        template = '![]($FILE_PATH)',
       },
     },
   },

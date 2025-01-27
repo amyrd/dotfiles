@@ -22,9 +22,7 @@ require('lazy').setup({
   require 'plugins/mini',
 
   require 'plugins/treesitter',
-
-  require 'plugins/nvim-tree',
-
+  --require 'plugins/nvim-tree',
   --require 'plugins/ui',
   require 'plugins/dashboard',
 
@@ -47,6 +45,7 @@ require('lazy').setup({
   require 'plugins/lc',
 
   require 'plugins/snow',
+  require 'plugins/oil',
   -- require 'plugins/avante',
 }, {
   ui = {

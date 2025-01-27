@@ -1,7 +1,37 @@
 return {
   {
-    'scottmckendry/cyberdream.nvim',
+    'catppuccin/nvim',
+    as = 'catppuccin',
+    priority = 1000,
     lazy = false,
+    config = function()
+      require('catppuccin').setup {
+        flavour = 'mocha', -- latte, frappe, macchiato, mocha
+        background = {
+          light = 'latte',
+          dark = 'mocha',
+        },
+        color_overrides = {
+          all = {
+            base = '#000000',
+          },
+          no_italic = false, -- Force no italic
+          no_bold = false,
+        },
+        transparent_background = false,
+        term_colors = false,
+        dim_inactive = {
+          enabled = true, -- dims the background color of inactive window
+          shade = '#000000',
+          percentage = 0.40, -- percentage of the shade to apply to the inactive window
+        },
+      }
+    end,
+  },
+
+  {
+    'scottmckendry/cyberdream.nvim',
+    lazy = false, -- Load lazily
     priority = 1000,
     config = function()
       require('cyberdream').setup {
@@ -18,9 +48,9 @@ return {
         },
         cache = true, -- add cache field (required by the plugin)
       }
-      vim.cmd 'colorscheme cyberdream' -- set the colorscheme
     end,
   },
+
   {
     'nyngwang/nvimgelion',
     lazy = true, -- load lazily if not used immediately

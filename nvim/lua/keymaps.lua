@@ -3,6 +3,7 @@ vim.opt.hlsearch = true
 vim.keymap.set('n', 'kj', '<cmd>nohlsearch<CR>')
 vim.keymap.set('i', 'kj', '<ESC>')
 vim.keymap.set('v', 'kj', '<ESC>')
+vim.keymap.set('n', '¥^', '<CMD>Oil --float <CR>', { noremap = true, silent = true })
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })

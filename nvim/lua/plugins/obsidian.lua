@@ -44,6 +44,7 @@ return {
       }
 
       -- keybinds
+      vim.keymap.set('n', '<C-v>', ':ObsidianFollowLink vsplit<CR>', { desc = 'open link as vertical split' })
       vim.keymap.set('n', '-#', ':ObsidianTags<CR>', { desc = 'tags' })
       vim.keymap.set('n', '-l', ':ObsidianBacklinks<CR>', { desc = 'backlinks' })
       vim.keymap.set('n', '-i', ':ObsidianTemplate<CR>', { desc = 'insert template' })
