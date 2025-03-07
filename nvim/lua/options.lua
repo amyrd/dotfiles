@@ -11,6 +11,7 @@ vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 -- Save undo history
 vim.opt.undofile = true
+vim.opt.encoding = 'utf-8'
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.opt.ignorecase = true
@@ -36,9 +37,7 @@ vim.opt.scrolloff = 20
 vim.api.nvim_create_autocmd('BufReadPre', {
   pattern = '*',
   callback = function()
-    -- Get the current file's full path
     local file_path = vim.fn.expand '%:p'
-    -- Check if the file is in the specific directory (e.g., ~/notes/)
     if file_path:match '/path/to/your/notes/' then
       vim.cmd 'silent !clear'
     end

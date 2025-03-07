@@ -1,5 +1,5 @@
 --[[
---return {
+return {
   'OXY2DEV/markview.nvim',
   lazy = false,
   config = function()
@@ -23,14 +23,13 @@
           icon_provider = 'devicons', -- "mini" or "devicons"
         },
       },
-      -- Add any other necessary configurations here
     }
 
     -- Define the strikethrough highlight group
     vim.api.nvim_set_hl(0, 'MarkviewCheckboxStrikethrough', { strikethrough = true })
   end,
 }
---]]
+  --]]
 
 return {
   'MeanderingProgrammer/render-markdown.nvim',

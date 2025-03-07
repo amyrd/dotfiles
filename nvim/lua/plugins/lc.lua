@@ -9,5 +9,6 @@ return {
   },
   opts = {
     lang = '', -- Specify the default language for Leetcode
+    image_support = true,
   },
 }

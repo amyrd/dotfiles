@@ -33,6 +33,7 @@ require('lazy').setup({
   require 'plugins/image',
 
   require 'plugins/imageclip',
+  require 'plugins/typer',
 
   require 'plugins/nvim-java',
 

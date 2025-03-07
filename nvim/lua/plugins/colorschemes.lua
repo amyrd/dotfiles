@@ -18,10 +18,10 @@ return {
           no_italic = false, -- Force no italic
           no_bold = false,
         },
-        transparent_background = false,
+        transparent_background = true,
         term_colors = false,
         dim_inactive = {
-          enabled = true, -- dims the background color of inactive window
+          enabled = false, -- dims the background color of inactive window
           shade = '#000000',
           percentage = 0.40, -- percentage of the shade to apply to the inactive window
         },

@@ -3,6 +3,7 @@ return {
     -- Main plugin for LSP configuration
     'neovim/nvim-lspconfig',
     dependencies = {
+
       -- Mason plugins for managing external tools
       { 'williamboman/mason.nvim', config = true },
       'williamboman/mason-lspconfig.nvim',
@@ -65,13 +66,19 @@ return {
       local servers = {
         clangd = { filetypes = { 'c', 'cpp', 'objc', 'objcpp' } },
         gopls = {}, -- Go
-        pyright = {}, -- Python
+        pyright = {
+
+          single_file_support = true,
+        }, -- Python
         rust_analyzer = { -- Rust
           root_dir = function(fname)
             return require('lspconfig.util').root_pattern('Cargo.toml', '.git')(fname) or vim.fn.fnamemodify(fname, ':p:h')
           end,
         },
-        cssls = {}, -- CSS
+        cssls = {
+          eslint = {},
+          ts_ls = {},
+        }, -- CSS
         html = {}, -- HTML
         sqls = { -- SQL
           on_attach = function(client, bufnr)
@@ -88,9 +95,32 @@ return {
         },
       }
 
+      local lspconfig = require 'lspconfig'
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+      lspconfig.emmet_ls.setup {
+        -- on_attach = on_attach,
+        capabilities = capabilities,
+        filetypes = { 'css', 'eruby', 'html', 'javascript', 'javascriptreact', 'less', 'sass', 'scss', 'svelte', 'pug', 'typescriptreact', 'vue' },
+        init_options = {
+          html = {
+            options = {
+              -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
+              ['bem.enabled'] = true,
+            },
+          },
+        },
+      }
       -- Ensure the specified LSP servers are installed
       local ensure_installed = vim.tbl_keys(servers)
-
+      local mason_lspconfig = require 'mason-lspconfig'
+      mason_lspconfig.setup {
+        ensure_installed = { 'pyright' },
+      }
+      require('lspconfig').pyright.setup {
+        capabilities = capabilities,
+      }
       -- Mason setup
       require('mason').setup()
 
