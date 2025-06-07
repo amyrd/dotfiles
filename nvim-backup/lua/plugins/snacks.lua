@@ -14,17 +14,6 @@ return {
         {
           section = 'terminal',
           cmd = 'krabby random -i; sleep .1',
-          --
-          --
-          -- run for mark navarro
-          --
-          -- NOTE: TOP SECRET
-          --
-          --cmd = 'cd ~/code/donut/ && ./donut',
-          --
-          -- mega, mega-x, mega-y, gmax, alola, hisui, galar
-          --
-          --cmd = 'krabby name zoroark -i --form hisui',
           ttl = 0,
           pane = 2,
           indent = 4,
@@ -33,6 +22,15 @@ return {
           height = 30,
           width = 60,
         },
+      },
+    },
+    image = {
+      doc = {
+        enabled = true,
+        inline = false,
+        float = true,
+        max_width = 80,
+        max_height = 80,
       },
     },
   },

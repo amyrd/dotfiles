@@ -42,7 +42,7 @@ return {
         checked = { scope_highlight = '@markup.strikethrough' },
       },
       latex = {
-        enabled = true,
+        enabled = false,
         converter = 'latex2text',
         highlight = 'RenderMarkdownMath',
         top_pad = 1,

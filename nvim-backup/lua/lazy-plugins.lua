@@ -3,6 +3,7 @@ require('lazy').setup({
   -- Use `opts = {}` to force a plugin to be loaded.
   { 'numToStr/Comment.nvim', opts = {} },
 
+  require 'plugins/fsharp',
   require 'plugins/gitsigns',
 
   require 'plugins/which-key',
@@ -22,15 +23,11 @@ require('lazy').setup({
   require 'plugins/mini',
 
   require 'plugins/treesitter',
-  --require 'plugins/nvim-tree',
-  --require 'plugins/ui',
-  require 'plugins/dashboard',
+  require 'plugins/snacks',
 
   require 'plugins/autopairs',
 
   require 'plugins/obsidian',
-
-  require 'plugins/image',
 
   require 'plugins/imageclip',
   require 'plugins/typer',
