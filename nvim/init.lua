@@ -1,21 +1,28 @@
--- load core modules
+-- Set leader key early
+vim.g.mapleader = ' '
+
+-- Load core settings
 require('core.options')
 require('core.keymaps')
-require('core.autocmds')
 
--- bootstrap plugin manager
-local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+-- Bootstrap lazy.nvim (FIXED VERSION)
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({
-		'git',
-		'clone',
-		'--filter=blob=none',
-		'https://github.com/folke/lazy.nvim.git',
-		lazypath,
-	})
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- important for stability
+    lazypath,
+  })
 end
 vim.opt.rtp:prepend(lazypath)
 
--- load plugins
-require('lazy').setup('plugins')
-
+-- Initialize lazy.nvim
+require("lazy").setup("plugins", {
+  install = {
+    missing = true, -- automatically install missing plugins
+    colorscheme = { "catppuccin" }
+  },
+})
