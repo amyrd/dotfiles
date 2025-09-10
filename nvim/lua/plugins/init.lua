@@ -8,4 +8,7 @@ return {
   require('plugins/ui'),
   require('plugins/snacks'),
   require('plugins/image'),
+  require('plugins/transparent'),
+  require('plugins/treesitter'),
 }
+

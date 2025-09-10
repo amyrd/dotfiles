@@ -8,11 +8,14 @@ return {
       sections = {
         {
           section = 'terminal',
-          cmd = 'cat ~/知識の書庫/todo.md; sleep .1',
+          cmd = 'echo "you are what you put your focus to"',
           ttl = 0,
+          pane = 1,
           indent = 4,
-          padding = 5,
+          -- height for donut
+          --height = 60,
         },
+ 
         {
           section = 'terminal',
           cmd = 'krabby random -i; sleep .1',
@@ -27,16 +30,6 @@ return {
       },
     },
     image = {
-      doc = {
-        enabled = true,
-        inline = false,
-        float = true,
-        max_width = 80,
-        max_height = 80,
-      },
     },
-  },
-  keys = {
-    {"<leader>tu", function() require("snacks").picker.colorschemes({layout = "ivy"}) end, desc = "Pick Color Schemes"},
   },
 }

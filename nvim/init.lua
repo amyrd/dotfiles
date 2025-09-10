@@ -1,6 +1,5 @@
 -- Set leader key early
 vim.g.mapleader = ' '
-
 -- Load core settings
 require('core.options')
 require('core.keymaps')
@@ -23,6 +22,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins", {
   install = {
     missing = true, -- automatically install missing plugins
-    colorscheme = { "catppuccin" }
   },
 })
+
+vim.cmd('colorscheme catppuccin')
