@@ -8,7 +8,7 @@ return {
       sections = {
         {
           section = 'terminal',
-          cmd = 'echo "you are what you put your focus to"',
+          cmd = 'echo ""to be everywhere is to be nowhere" \n - Seneca"',
           ttl = 0,
           pane = 1,
           indent = 4,
@@ -29,7 +29,6 @@ return {
         },
       },
     },
-    image = {
-    },
+    image = {},
   },
 }

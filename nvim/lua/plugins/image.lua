@@ -44,7 +44,7 @@ return {
 
       --process_cmd = 'convert - -resize 75% -depth 8 -strip -quality 75 avif:-',
 
-      process_cmd = 'convert - -resize 75% -strip -quality 75 webp:-',
+      process_cmd = 'convert - -resize 25% -strip -quality 100 webp:-',
       --process_cmd = 'convert - -quality 75 avif:-', ---@type string
 
       -- extension = "webp", ---@type string

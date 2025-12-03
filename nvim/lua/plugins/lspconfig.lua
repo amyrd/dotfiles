@@ -159,10 +159,42 @@ return {
 
      local servers = {
         
-        ruby_lsp = {},
+        -- ruby_lsp = {},
+
         clangd = {},
         gopls = {},
-        pyright = {},
+        pyright = {
+          root_dir = function(fname)
+            local util = require("lspconfig.util")
+            return util.root_pattern(
+              "pyproject.toml",
+              "setup.py",
+              "setup.cfg",
+              "requirements.txt",
+              ".git"
+            )(fname) or util.path.dirname(fname)
+          end,
+          settings = {
+            python = {
+              pythonPath = (function()
+                local cwd = vim.fn.getcwd()
+                if vim.fn.executable(cwd .. "/.venv/bin/python3") == 1 then
+                  return cwd .. "/.venv/bin/python3"
+                elseif vim.fn.executable(cwd .. "/venv/bin/python3") == 1 then
+                  return cwd .. "/venv/bin/python3"
+                else
+                  return "/opt/homebrew/bin/python3" -- fallback
+                end
+              end)(),
+              analysis = {
+                autoSearchPaths = true,
+                diagnosticMode = "openFilesOnly",
+                useLibraryCodeForTypes = true,
+              },
+            },
+          },
+        },
+
         rust_analyzer = {},
         ts_ls = {},
         lua_ls = {
